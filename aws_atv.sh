@@ -24,3 +24,19 @@ sudo apt install -y git >> $logfile
 # Clonando Repositório
 echo "Clonando repositório com site e movendo para pasta /var/www/html/..." | tee -a $logfile
 sudo git clone https://github.com/IsaquePerez/Atividade-no-ambiente-linux.git /tmp/atividade >> $logfile
+sudo mv /tmp/atividade/AtividadeAwsRestart/index.html /var/www/html/ >> $logfile
+
+# Ajustando Permissões
+echo "Ajustando permissões..." | tee -a $logfile
+sudo chmod -R 755 /var/www/html/ >> $logfile
+
+# Reiniciando Apache
+echo "Reiniciando Apache..." | tee -a $logfile
+sudo systemctl restart apache2 >> $logfile
+sudo systemctl status apache2 >> $logfile
+
+# Enviar solicitação POST
+echo "Enviando solicitação POST para https://difusaotech.com.br/lab/aws/index.php" | tee -a $logfile
+sudo curl -X POST -d "nome=Bruno Emanoel" https://difusaotech.com.br/lab/aws/index.php >> $logfile
+
+echo "Script finalizado" | tee -a $logfile
